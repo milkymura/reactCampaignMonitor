@@ -1,10 +1,9 @@
 export function convertToMoney(
-  money
+  myMoney
   , withCurrency = true 
   , currency = 'USD') {
 
-
-  console.log('@@convertToMoney [money] == ', money)
+  const money = parseInt(myMoney)
 
   let money_currency = ''
   let money_decimal = money.toFixed(2)
@@ -21,7 +20,6 @@ export function convertToMoney(
     money_after = money_value
   }
 
-  console.log('@@convertToMoney [money_after] == ', money_after)
 
   return money_after
 }

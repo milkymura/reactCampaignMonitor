@@ -1,7 +1,7 @@
 import { applyMiddleware, createStore, compose } from 'redux';
 import createReducer from './createReducer';
-import initialState from './redux/configureState';
-import rootReducer from './redux/configureReducer';
+import initialState from './redux/globalState';
+import rootReducer from './redux/reducers';
 
 
 

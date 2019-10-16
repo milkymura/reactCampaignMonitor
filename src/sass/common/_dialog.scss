@@ -1,0 +1,24 @@
+body > span > .md-dialog-container.md-overlay {
+	z-index: 9999;
+}
+
+
+.customDialog {
+	// .customDialog_dialog
+	&_dialog {
+		width: 100vw;
+		max-width: 800px;
+	}
+
+	// .customDialog_header
+	&_header {
+		padding: 1rem;
+		border-bottom: 1px solid $gray-200;
+		font-family: $font-family;
+		font-weight: bold;
+	}
+
+	&_content {
+		overflow: visible;
+	}
+}

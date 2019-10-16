@@ -1,22 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { convertToMoney } from 'tools/helper'
+import debounce from 'lodash/debounce';
+import moment from 'moment'
+import { useDispatch, useSelector } from 'react-redux';
+
 import {
   Paper,
   TextField,
-  DatePicker 
+  DatePicker,
+  Button
 } from 'react-md';
-import { shallowEqual, useSelector } from 'react-redux'
-import { convertToMoney } from 'tools/helper'
-import Table from 'components/DataTable'
-import moment from 'moment'
-import debounce from 'lodash/debounce';
+import Table from 'components/DataTable';
+import RowToolbar from 'components/DashboardLayout/RowToolbar';
+import { AddCampaignDialog } from 'components/Dialogs'
+
+
 
 function Campaign(props) {
   const DATENOW = moment()
   const campaignlist = useSelector(state => state.campaignlist)
   const [tempList, updateTempList] = useState(campaignlist)
+  const [isCampaignDialogOpen, handleCampaignDialogOpen] = useState(false)
   const [search, updateSearch] = useState('')
   const [startEndDate, updateStartEndDate] = useState({ startDate : '', endDate: ''})
 
+  useEffect(() => {}, [ campaignlist ])
+
+  // console.log('Campaign', campaignlist)
 
   const tableHeaderKeys = [
     {
@@ -46,7 +56,6 @@ function Campaign(props) {
   ]
 
   const rowRenderer = (col,row) => {
-
 
     if (col === 'budget') {
       return convertToMoney(row[col])
@@ -104,46 +113,66 @@ function Campaign(props) {
     }
   }
 
+  const toolbarHandlers = {
+    onClickNew: () => { 
+      handleCampaignDialogOpen(true)
+    }
+  }
+
   return(
-    <Paper>
-      <div className="row row-headerToolbar">
-        <div className="col col-md-6 col-dates">
-          <DatePicker
-            portal
-            renderNode={document.body}
-            id="appointment-date-portrait"
-            label="Start Date"
-            className="md-cell"
-            displayMode="portrait"
-            onChange={(e) => { handleDateChange(e, 'startDate') }}
-          />
-          <DatePicker
-            portal
-            renderNode={document.body}
-            id="appointment-date-portrait"
-            label="End Date"
-            className="md-cell"
-            displayMode="portrait"
-            onChange={(e) => { handleDateChange(e, 'endDate') }}
-          />
-        </div>
-        <div className="col col-md-6 col-right col-search">
-          <TextField
-            id="floating-center-title"
-            label="filter name"
-            lineDirection="center"
-            placeholder="Hello World"
-            className="md-cell md-cell--bottom"
-            onChange={(e) => { handleSearch(e)} }
-          />
-        </div>
-      </div>
-      <Table
-        items={tempList}
-        tableHeaderKeys={tableHeaderKeys}
-        rowRenderer={rowRenderer}
+    <>
+      <AddCampaignDialog
+        title='Add Campaign'
+        visible={isCampaignDialogOpen}
+        onHideDialog={() => {handleCampaignDialogOpen(false)}}
       />
-    </Paper>
+      <RowToolbar
+        isSticky
+        title='Campaigns'
+        toolbarHandlers={toolbarHandlers}
+      />
+      <div className="row">
+        <Paper>
+          <div className="row row-headerToolbar">
+            <div className="col col-md-6 col-dates">
+              <DatePicker
+                portal
+                renderNode={document.body}
+                id="appointment-date-portrait"
+                label="Start Date"
+                className="md-cell"
+                displayMode="portrait"
+                onChange={(e) => { handleDateChange(e, 'startDate') }}
+              />
+              <DatePicker
+                portal
+                renderNode={document.body}
+                id="appointment-date-portrait"
+                label="End Date"
+                className="md-cell"
+                displayMode="portrait"
+                onChange={(e) => { handleDateChange(e, 'endDate') }}
+              />
+            </div>
+            <div className="col col-md-6 col-right col-search">
+              <TextField
+                id="floating-center-title"
+                label="filter name"
+                lineDirection="center"
+                placeholder="Hello World"
+                className="md-cell md-cell--bottom"
+                onChange={(e) => { handleSearch(e)} }
+              />
+            </div>
+          </div>
+          <Table
+            items={campaignlist}
+            tableHeaderKeys={tableHeaderKeys}
+            rowRenderer={rowRenderer}
+          />
+        </Paper>
+      </div>
+    </>
   )
 }
 

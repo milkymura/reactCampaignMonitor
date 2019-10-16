@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router';
-import DashboardLayout from './components/DashboardLayout';
+import DashboardLayout from './components/DashboardLayout/DashboardLayout';
 
 import Home from './container/Home';
 import Campaign from './container/Campaign';
