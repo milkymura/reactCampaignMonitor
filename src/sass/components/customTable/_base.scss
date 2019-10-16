@@ -1,0 +1,20 @@
+.customTable {
+	width: 100%;
+	background-color: #fff;
+
+	// .customTable_header
+	&_header {
+		.customTable_cell {
+			background-color: $gray-100;
+			text-transform: uppercase;
+			font-weight: bold;
+			font-size: 1rem;
+			color: $text-color;
+			border-bottom: .15rem solid $primary-color;
+		}
+	}
+
+	&_cell {
+		text-align: center;
+	}
+}
