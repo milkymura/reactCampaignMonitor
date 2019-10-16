@@ -5,11 +5,12 @@ import cn from 'classnames';
 
 
 function DashboardLayout(props) {
-  const { history, location, onLogout, menuItems } = props;
+  const { history, location, onLogout, menuItems, pageId } = props;
   const [isSidebarOpen, toggleSidebar] = useState(false);
   return (
     <div className={cn('adminPortal', {
       'adminPortal-sidebarOpen': isSidebarOpen,
+      [`adminPortal-page-${pageId}`]: pageId
     })}
     >
       <TopNav
