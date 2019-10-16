@@ -10,26 +10,26 @@ import NotFound from './container/NotFound';
 const routes = [
   {
     key: 'home',
-    component: () => (<Home/>),
+    component: (props) => (<Home {...props }/>),
     path: '/',
     exact: true,
   },
   {
     key: 'campaign-list',
-    component: () => (<Campaign/>),
+    component: (props) => (<Campaign {...props }/>),
     path: '/campaign',
     exact: true,
   },
   {
     key: 'campaign-details',
-    component: () => (<CampaignForm/>),
+    component: (props) => (<CampaignForm {...props }/>),
     path: '/campaign/:id',
     exact: true,
   },
   {
     key: 'not-found',
     path: '*',
-    component: () => (<NotFound />),
+    component: (props) => (<NotFound {...props} />),
     exact: true,
   }
 ]
