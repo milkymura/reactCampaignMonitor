@@ -1,0 +1,27 @@
+.nav {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 99;
+	width: 100%;
+	background-color: #fff;
+	height: $nav-height;
+	box-shadow: 0 0 1em 0 rgba(#000,.5);
+
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	padding: 0 1rem;
+
+	// .nav_logo
+	&_logo {
+		width: 20rem;
+		height: 100%;
+		img {
+			height: 100%;
+			width: 100%;
+			object-fit: contain;
+			object-position: center;
+		}
+	}
+}

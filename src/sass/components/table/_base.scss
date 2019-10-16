@@ -1,0 +1,150 @@
+.table {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: flex-start;
+	justify-content: flex-start;
+	flex-direction: column;
+	padding: 1rem;
+	// .table_header
+	&_header {
+		width: 100%;
+		flex-shrink: 0;
+		text-align: left;
+		margin: 0;
+		margin-bottom: 1rem;
+	}
+
+	// .table_body
+	&_body {
+		width: 100%;
+		display: flex;
+		flex-shrink: 1;
+		overflow-y: auto;
+	}
+
+	// .table_list
+	&_list {
+		width: 100%;
+		margin: 0;
+		padding: 0;
+
+
+		// .table_list_item
+		&_item {
+			position: relative;
+			padding: 1em .5em;
+			width: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			flex-wrap: nowrap;
+
+			.img {
+				width: 4rem;
+				height: 4rem;
+				overflow: hidden;
+				flex-shrink: 0;
+				border-radius: .25em;
+				img {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+					object-position: center center;
+				}
+			}
+
+			.info {
+				padding: .5rem 1rem;
+				flex-grow: 1;
+				flex-shrink: 1;
+				display: flex;
+				align-items: flex-start;
+				justify-content: flex-start;
+				flex-direction: column;
+
+				// .info_name
+				&_name {
+					font-size: 1.25rem;
+					margin: 0;
+				}
+
+				// .info_qty
+				&_qty {
+					font-size: 1rem;
+					font-style: italic;
+					margin: 0;
+				}
+			}
+
+			.price {
+				flex-shrink: 0;
+				font-size: 1.5rem;
+				color: $text-color;
+				font-weight: 600;
+			}
+
+			.delete {
+				position: absolute;
+				top: .5em;
+				right: .5em;
+				color: $gray-200;
+				cursor: pointer;
+				&:hover {
+					color: $error;
+				}
+			}
+		}
+
+		// .table_list_item
+		&_item:not(:last-child) {
+			border-bottom: 1px dashed rgba(#000,.15);
+		}
+
+		// .table_list_empty
+		&_empty {
+			font-style: italic;
+			font-weight: 500;
+			font-size: 1.5rem;
+			color: rgba(#000,.25);
+		}
+	}
+
+	// .table_footer
+	&_footer {
+		width: 100%;
+		margin-top: 2rem;
+
+		.total {
+			width: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+		}
+
+		.label {
+			font-size: 1.25rem;
+			color: rgba($text-color,.5);
+			margin: 0;
+		}
+
+		.value {
+			font-size: 2rem;
+			font-weight: 700;
+			margin-left: auto;
+			margin-top: 0;
+			margin-bottom: 0;
+			color: $text-color;
+		}
+	}
+
+	// table_checkoutBtn
+	&_checkoutBtn {
+		margin-top: 4rem;
+		width: 100%;
+		background-color: $secondary-color;
+		color: #FFF;
+		font-size: 1.5rem;
+	}
+}

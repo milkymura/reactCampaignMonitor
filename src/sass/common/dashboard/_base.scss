@@ -1,0 +1,22 @@
+$navigation-size: 256px;
+
+.dashboard {
+	width: 100vw;
+	display: flex;
+
+	// .dashboard__navigation
+	&__navigation {
+		
+	}
+
+	// .dashboard__contents
+	&__contents {
+		position: relative;
+		left: $navigation-size;
+		width: 100%;
+		max-width: calc( 100% - #{$navigation-size});
+		transition:
+			left 300ms ease-out,
+			max-width 300ms ease-out;
+	}
+}
