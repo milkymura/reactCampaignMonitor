@@ -11,6 +11,10 @@ html , body {
 }
 
 #root {
-	width: 100vw;
+	width: 100%;
 	min-height: 100vh;
+}
+
+.md-no-scroll.md-no-scroll {
+	width: 100%;
 }

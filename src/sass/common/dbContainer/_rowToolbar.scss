@@ -36,3 +36,33 @@
 		}
 	}
 }
+
+@media (max-width: 900px) {
+	.rowToolbar {
+		flex-direction: column;
+		// .rowToolbar_title
+		&_title {
+			width: 100%;
+			border-bottom: 2px solid $gray-100;
+			.title {
+				max-width: 100%;
+			}
+		}
+	}
+}
+
+@media (max-width: 600px) {
+	.rowToolbar_toolbar {
+		width: 100%;
+		.iBttn {
+			width: 100%;
+			.md-icon-separator {
+				align-items: center;
+				justify-content: center;
+			}
+			.md-icon-text {
+				flex-grow: 0;
+			}
+		}
+	}
+}

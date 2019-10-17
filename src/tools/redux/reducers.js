@@ -9,6 +9,13 @@ export default {
     };
   },
 
+  SET_SIDEBAR_VISIBILITY(state, { payload }) {
+    return { 
+      ...state, 
+      isSidebarOpen: payload
+    };
+  },
+
   UPDATE_CARTLIST(state, { payload }) {
     return { 
       ...state, 

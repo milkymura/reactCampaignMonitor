@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { convertToMoney } from 'tools/helper'
 import debounce from 'lodash/debounce';
 import moment from 'moment'
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import {
   Paper,
@@ -13,7 +13,6 @@ import {
 import Table from 'components/DataTable';
 import RowToolbar from 'components/DashboardLayout/RowToolbar';
 import { AddCampaignDialog } from 'components/Dialogs'
-
 
 
 function renderFilteredListBySearch(list, search) {
@@ -37,6 +36,33 @@ function fitlerList(list, search, { startDate, endDate }) {
   list = renderFilteredListBySearch(list, search)
   list = filterListByDate(list, startDate, endDate)
   return list
+}
+
+function rowRenderer(col,row) {
+
+  if (col === 'budget') {
+    return convertToMoney(row[col])
+  }
+
+  if (col === 'status') {
+    const DATENOW = moment()
+    const { startDate, endDate } = row
+    const isActive = DATENOW > moment(startDate) && DATENOW < moment(endDate)
+    if(isActive) {
+      return (
+        <div className="statusPill statusPill-success">
+          active
+        </div>
+      )
+    }
+    return (
+      <div className="statusPill statusPill-default">
+        not active
+      </div>
+    )
+  }
+
+  return row[col]
 }
 
 function Campaign(props) {
@@ -78,32 +104,7 @@ function Campaign(props) {
     }
   ]
 
-  const rowRenderer = (col,row) => {
 
-    if (col === 'budget') {
-      return convertToMoney(row[col])
-    }
-
-    if (col === 'status') {
-      const DATENOW = moment()
-      const { startDate, endDate } = row
-      const isActive = DATENOW > moment(startDate) && DATENOW < moment(endDate)
-      if(isActive) {
-        return (
-          <div className="statusPill statusPill-success">
-            active
-          </div>
-        )
-      }
-      return (
-        <div className="statusPill statusPill-default">
-          not active
-        </div>
-      )
-    }
-
-    return row[col]
-  }
 
 
   const handleSearch = (val) => {

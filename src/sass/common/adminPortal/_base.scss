@@ -43,8 +43,8 @@ $container-bg: #F6F6F6;
 		left: $sidebar-width;
 		width: 100%;
 		height: calc(100vh - #{$nav-height});
-		background-color: $container-bg;
 		overflow-y: auto;
+		background-color: $container-bg;
 		max-width: calc(100% - #{$sidebar-width});
 		transition:
 			left 300ms ease-out,
@@ -65,4 +65,17 @@ $container-bg: #F6F6F6;
 	}
 }
 
+
+@media (max-width: 600px) {
+	.adminPortal {
+		width: 100vw;
+		overflow: hidden;
+		// .adminPortal_container
+		&_container {
+			min-width: calc(100vw - 3.5rem);
+			height: auto;
+			overflow: visible;
+		}
+	}
+}
 

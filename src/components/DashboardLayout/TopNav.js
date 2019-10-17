@@ -16,14 +16,6 @@ function TopNav(props) {
         onClick={() => { handleToggleSidebar(!isSidebarOpen); }}
         className="topnav_toggle"
       />
-      <Button
-        flat
-        secondary
-        onClick={onLogout}
-        children="Logout"
-        iconEl={<i className="wtfr wtf-sign-out" />}
-        className="topnav_logout iBttn iBttn-second-prio"
-      />
     </div>
   );
 }
