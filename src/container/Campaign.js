@@ -16,13 +16,36 @@ import { AddCampaignDialog } from 'components/Dialogs'
 
 
 
+function renderFilteredListBySearch(list, search) {
+  return list.filter((row) => {
+    return row.name.toLowerCase().includes(search.toLowerCase())
+  })
+}
+
+function filterListByDate(list, startDate, endDate) {
+  if (startDate && endDate) {
+    return list.filter((row) => {
+      return (moment(row.startDate) >= moment(startDate) && moment(row.startDate) <= moment(endDate)) &&
+        (moment(row.endDate) >= moment(startDate) && moment(row.endDate) <= moment(endDate))
+    })
+  }
+
+  return list
+}
+
+function fitlerList(list, search, { startDate, endDate }) {
+  list = renderFilteredListBySearch(list, search)
+  list = filterListByDate(list, startDate, endDate)
+  return list
+}
+
 function Campaign(props) {
-  const DATENOW = moment()
   const campaignlist = useSelector(state => state.campaignlist)
   const [tempList, updateTempList] = useState(campaignlist)
   const [isCampaignDialogOpen, handleCampaignDialogOpen] = useState(false)
-  const [search, updateSearch] = useState('')
-  const [startEndDate, updateStartEndDate] = useState({ startDate : '', endDate: ''})
+
+  const [search, setSearch] = useState('')
+  const [startEndDate, setStartEndDate] = useState({ startDate : '', endDate: ''})
 
   useEffect(() => {}, [ campaignlist ])
 
@@ -62,6 +85,7 @@ function Campaign(props) {
     }
 
     if (col === 'status') {
+      const DATENOW = moment()
       const { startDate, endDate } = row
       const isActive = DATENOW > moment(startDate) && DATENOW < moment(endDate)
       if(isActive) {
@@ -81,36 +105,15 @@ function Campaign(props) {
     return row[col]
   }
 
-  const handleFilter = (filterKey, searchedWord) => {
-    let filtered = [...campaignlist]
-    updateSearch(searchedWord)
 
-    if(searchedWord) {
-      filtered = [...campaignlist].filter((row) => {
-        return row[filterKey].toLowerCase().includes(search.toLowerCase())
-      })
-    }
-
-    updateTempList(filtered)
-  }
-
-  const handleSearch = (e) => {
-    handleFilter('name', e)
+  const handleSearch = (val) => {
+    setSearch(val)
   }
 
   const handleDateChange = (date, dateKey) => {
     const tempRange = { ...startEndDate }
     tempRange[dateKey] = date
-    updateStartEndDate(tempRange)
-
-    if(tempRange.startDate !== '' 
-      && tempRange.endDate !== '') {
-      const filtered = [...campaignlist].filter((row) => {
-        const { startDate, endDate } = row
-        return DATENOW > moment(startDate) && DATENOW < moment(endDate)
-      })
-      updateTempList(filtered)
-    }
+    setStartEndDate(tempRange)
   }
 
   const toolbarHandlers = {
@@ -142,6 +145,7 @@ function Campaign(props) {
                 label="Start Date"
                 className="md-cell"
                 displayMode="portrait"
+                value={startEndDate.startDate}
                 onChange={(e) => { handleDateChange(e, 'startDate') }}
               />
               <DatePicker
@@ -151,7 +155,15 @@ function Campaign(props) {
                 label="End Date"
                 className="md-cell"
                 displayMode="portrait"
+                value={startEndDate.endDate}
                 onChange={(e) => { handleDateChange(e, 'endDate') }}
+              />
+              <Button
+                flat
+                icon
+                children="close"
+                className="iBttn iBttn-primary"
+                onClick={() => {setStartEndDate({ startDate : '', endDate: ''})}}
               />
             </div>
             <div className="col col-md-6 col-right col-search">
@@ -161,12 +173,12 @@ function Campaign(props) {
                 lineDirection="center"
                 placeholder="Hello World"
                 className="md-cell md-cell--bottom"
-                onChange={(e) => { handleSearch(e)} }
+                onChange={(val) => { handleSearch(val) } }
               />
             </div>
           </div>
           <Table
-            items={campaignlist}
+            items={fitlerList(campaignlist, search, startEndDate)}
             tableHeaderKeys={tableHeaderKeys}
             rowRenderer={rowRenderer}
           />

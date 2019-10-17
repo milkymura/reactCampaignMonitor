@@ -25,7 +25,9 @@ function AddCampaignDialog(props) {
         ...fields
       }
     });
+    props.onHideDialog()
   }
+
 
   const handleField = (val, key) => {
     const tempFields = {...fields}
