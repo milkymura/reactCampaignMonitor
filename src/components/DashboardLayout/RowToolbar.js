@@ -14,7 +14,7 @@ function RowToolbar(props) {
   const { onClickNew } = toolbarHandlers
 
   return (
-    <div className={cn('row', {
+    <div className={cn('row row-ToolbarHeader', {
       'row-ToolbarHeader-sticky' : isSticky
     })}>
       <Paper>

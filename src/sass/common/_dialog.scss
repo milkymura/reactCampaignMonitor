@@ -27,3 +27,27 @@ body > span > .md-dialog-container.md-overlay {
 		}
 	}
 }
+
+
+$fullpage-zIndex-initial-value: 99999;
+$fullpage-number-of-spans: 3; 
+body {
+	$z-index : $fullpage-zIndex-initial-value;
+	@for $i from $fullpage-number-of-spans through 1{
+
+		> span:nth-child( #{$fullpage-number-of-spans}n + #{$i} ) {
+			&:not(.dna-preloader) ,
+			&:not(#app-container) {
+				.md-dialog-container {
+					z-index: $z-index;
+				}
+			}
+		}
+
+		$z-index : $z-index + 10;
+	}
+}
+
+.md-no-scroll {
+	width: 100%;
+}

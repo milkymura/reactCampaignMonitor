@@ -124,6 +124,16 @@ $btn-colors: (
 }
 
 
+.iBttn.md-text--disabled {
+	border-color: transparent;
+	color: $gray-200;
+	background-color: $gray-100;
+	font-weight: bold;
+	.md-icon {
+		color: $gray-200;
+	}
+}
+
 .iBttn-second-prio {
 	border-color: transparent;
 	color: $text-color;

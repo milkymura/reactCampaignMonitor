@@ -14,10 +14,19 @@ function AddCampaignDialog(props) {
   const dispatch = useDispatch();
   const campaignlistLength = useSelector(state => state.campaignlist.length)
 
-  const [ fields , updateFields ] = useState({})
+  const defaultFields = {
+    name: '',
+    budget: '',
+    startDate: '',
+    endDate: ''
+  }
+
+  const [ errorFields , updateErrors ] = useState(defaultFields)
+  const [ fields , updateFields ] = useState(defaultFields)
 
 
   const handleSave = () => {
+
     dispatch({ 
       type: 'ADD_CAMPAIGN',
       payload: {
@@ -31,57 +40,81 @@ function AddCampaignDialog(props) {
 
   const handleField = (val, key) => {
     const tempFields = {...fields}
+    const tempErrorFields = {...errorFields}
+
     // console.log('handleField E', e)
     // console.log('handleField VAL', val)
-    tempFields[key] = val
+    if (val !== '') {
+      if (key === 'budget') {
+        tempFields.budget = !isNaN(val) && val
+      } else {
+        tempFields[key] = val
+      }
+      delete tempErrorFields[key]
+    } else {
+      tempErrorFields[key] = `${key} is required`
+    }
+
     updateFields(tempFields)
+    updateErrors(tempErrorFields)
   }
 
   return (
     <>
       <TextField
+        required
         id="name"
-        label="filter name"
+        label="Campaign Name"
         lineDirection="center"
         className="cField"
         onChange={(val) => { handleField(val,'name')}}
+        errorText={errorFields.name}
       />
       <TextField
+        required
         id="budget"
         label="Budget"
         lineDirection="center"
         className="cField"
+        value={fields.budget ? fields.budget : ''}
         onChange={(val) => { handleField(val,'budget')}}
+        errorText={errorFields.budget}
       />
       <div className="row">
         <div className="col col-md-6">
           <DatePicker
-            inline
+            required
+            portal
+            renderNode={document.body}
             id="startDate"
             label="Select a Start Date"
             displayMode="portrait"
             fullWidth={false}
             className="cField cField-date"
             onChange={(val) => { handleField(val,'startDate')}}
+            errorText={errorFields.startDate}
           />
         </div>
         <div className="col col-md-6">
           <DatePicker
-            inline
+            required
+            portal
+            renderNode={document.body}
             id="endDate"
             label="Select a End Date"
             displayMode="portrait"
             fullWidth={false}
             className="cField cField-date"
             onChange={(val) => { handleField(val,'endDate')}}
+            errorText={errorFields.endDate}
           />
         </div>
       </div>
-
       <div className="row">
         <div className="col col-right">
           <Button
             flat
+            disabled={Object.keys(errorFields).length !== 0}
             children="Save"
             iconChildren="check"
             className="iBttn iBttn-primary"

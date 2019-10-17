@@ -105,8 +105,6 @@ function Campaign(props) {
   ]
 
 
-
-
   const handleSearch = (val) => {
     setSearch(val)
   }
@@ -161,9 +159,10 @@ function Campaign(props) {
               />
               {startEndDate.startDate && startEndDate.endDate && (
                 <Button
-                  icon
-                  children="close"
-                  className="iBttn iBttn-icon iBttn-primary"
+                  flat
+                  iconChildren="close"
+                  children="clear dates"
+                  className="iBttn iBttn-second-prio"
                   onClick={() => {setStartEndDate({ startDate : '', endDate: ''})}}
                 />
               )}

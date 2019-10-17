@@ -5,11 +5,22 @@ import cn from 'classnames';
 function Sidebar(props) {
   const {
     className, menu, history, location,
+    logo = './images/logo.png', 
+    logoSm = './images/logo-sm.png'
   } = props;
   return (
     <div className={`${className} sidebar`}>
       <div className="sidebar_logo">
-        <h1>LOGO</h1>
+        <img
+          src={logo}
+          alt="logo"
+          className="logo"
+        />
+        <img
+          src={logoSm}
+          alt="logoSm"
+          className="logoSm"
+        />
       </div>
       <List className="sidebar_list">
         {menu.map((item, index) => {
