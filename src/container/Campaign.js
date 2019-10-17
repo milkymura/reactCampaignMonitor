@@ -136,8 +136,8 @@ function Campaign(props) {
       />
       <div className="row">
         <Paper>
-          <div className="row row-headerToolbar">
-            <div className="col col-md-6 col-dates">
+          <div className="row row-headerToolbar ">
+            <div className="col col-md-6 col-dates col-middle">
               <DatePicker
                 portal
                 renderNode={document.body}
@@ -159,10 +159,9 @@ function Campaign(props) {
                 onChange={(e) => { handleDateChange(e, 'endDate') }}
               />
               <Button
-                flat
                 icon
                 children="close"
-                className="iBttn iBttn-primary"
+                className="iBttn iBttn-icon iBttn-primary"
                 onClick={() => {setStartEndDate({ startDate : '', endDate: ''})}}
               />
             </div>

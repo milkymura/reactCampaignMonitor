@@ -133,6 +133,10 @@ $margin: .5em;
 		align-items: center;
 	}
 
+	&-bottom {
+		align-items: flex-end;
+	}
+
 	&-stretch {
 		align-items: stretch;
 	}
