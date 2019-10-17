@@ -78,14 +78,17 @@ function AddCampaignDialog(props) {
         </div>
       </div>
 
-
-      <Button
-        flat
-        children="Save"
-        iconChildren="check"
-        className="iBttn iBttn-primary"
-        onClick={handleSave}
-      />
+      <div className="row">
+        <div className="col col-right">
+          <Button
+            flat
+            children="Save"
+            iconChildren="check"
+            className="iBttn iBttn-primary"
+            onClick={handleSave}
+          />
+        </div>
+      </div>
     </>
   );
 }

@@ -49,6 +49,7 @@ const menu = [
   }
 ]
 
+
 export function renderRoutes(extraProps = {}, switchProps = {}) {
   return (
     <Switch {...switchProps}>

@@ -18,7 +18,12 @@ body > span > .md-dialog-container.md-overlay {
 		font-weight: bold;
 	}
 
+	// .customDialog_content
 	&_content {
 		overflow: visible;
+
+		.row:not(:last-child) {
+			margin-bottom: 1rem;
+		}
 	}
 }

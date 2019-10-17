@@ -158,12 +158,14 @@ function Campaign(props) {
                 value={startEndDate.endDate}
                 onChange={(e) => { handleDateChange(e, 'endDate') }}
               />
-              <Button
-                icon
-                children="close"
-                className="iBttn iBttn-icon iBttn-primary"
-                onClick={() => {setStartEndDate({ startDate : '', endDate: ''})}}
-              />
+              {startEndDate.startDate && startEndDate.endDate && (
+                <Button
+                  icon
+                  children="close"
+                  className="iBttn iBttn-icon iBttn-primary"
+                  onClick={() => {setStartEndDate({ startDate : '', endDate: ''})}}
+                />
+              )}
             </div>
             <div className="col col-md-6 col-right col-search">
               <TextField

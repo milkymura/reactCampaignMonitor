@@ -3,3 +3,27 @@
 @import 'components/dialogs/index';
 @import 'components/customTable/index';
 
+
+
+.bio {
+	width: 100%;
+	max-width: 600px;
+	margin: 0 auto;
+	padding: 1rem;
+	min-height: 80vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	// .bio_header
+	&_header {
+		text-align: center;
+		font-weight: bold;
+		color: $text-color;
+		.name {
+			font-size: 2em;
+			line-height: 1.25;
+			display: block;
+		}
+	}
+}
